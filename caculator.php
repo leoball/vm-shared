@@ -22,6 +22,6 @@
   eval(' \$str = \"$str\"; ');
   echo $str;
   
-  
+  ?
 
 ?>
