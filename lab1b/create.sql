@@ -25,15 +25,16 @@ CREATE TABLE Director (
 ) ENGINE = INNODB;
 
 CREATE TABLE MovieGenre (
-	mid INT PRIMARY KEY NOT NULL,
+	mid INT,
 	genre VARCHAR(20) NOT NULL,
+	PRIMARY KEY(mid,genre),
 	Foreign KEY (mid) REFERENCES Movie(id)
 ) ENGINE = INNODB;
 
 CREATE TABLE MovieDirector (
 	mid INT PRIMARY KEY,
 	did INT NOT NULL,
-	Foreign KEY (mid) REFERENCES Movie(id)
+	Foreign KEY (mid) REFERENCES Movie(id),
 	Foreign KEY (did) REFERENCES Director(id)
 ) ENGINE = INNODB;
 
@@ -41,8 +42,8 @@ CREATE TABLE MovieActor (
 	mid INT,
 	aid INT,
 	role VARCHAR(50),
-	PRIMARY KEY(mid, aid)
-	Foreign KEY (mid) REFERENCES Movie(id)
+	PRIMARY KEY(mid, aid),
+	Foreign KEY (mid) REFERENCES Movie(id),
 	Foreign KEY (aid) REFERENCES Actor(id)
 ) ENGINE = INNODB;
 
@@ -52,7 +53,7 @@ CREATE TABLE Review (
 	mid INT NOT NULL,
 	rating INT NOT NULL,
 	comment VARCHAR(500),
-	PRIMARY KEY(name, time)
+	PRIMARY KEY(name, time),
 	Foreign KEY (mid) REFERENCES Movie(id)
 ) ENGINE = INNODB;
 
