@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 CREATE TABLE Movie (
 	id				INT PRIMARY KEY,
 	title			VARCHAR(100),
@@ -34,3 +35,27 @@ CREATE TABLE MaxPersonID (
 CREATE TABLE MaxMovieID(id) (
 	id				INT PRIMARY KEY
 );
+=======
+CREATE TABLE Actor(
+	id INT PRIMARY KEY,
+	last VARCHAR(20),
+	first VARCHAR(20),
+	sex VARCHAR(6),
+	dob DATE,
+	dod DATE
+
+);
+CREATE TABLE Director(
+	id INT PRIMARY KEY,
+	last VARCHAR(20),
+	first VARCHAR(20),
+	dob DATE,
+	dod DATE
+
+
+);
+CREATE TABLE MovieDirector(
+	mid INT PRIMARY KEY,
+	did INT
+) 
+>>>>>>> Stashed changes
