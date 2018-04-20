@@ -45,7 +45,7 @@ if($db->connect_errno > 0){
   echo "</tr>"; 
   while($row = mysqli_fetch_row($rs)){
     
-    echo "<tr>"; 
+    echo "<tr align=center>"; 
 
    
     $count = 0;
