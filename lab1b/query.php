@@ -22,7 +22,7 @@
   </p>
   
 
-
+<table border=1 cellspacing = 1 cellpadding=2>
 <?php
 
 $db = new mysqli('localhost', 'cs143', '', 'CS143');
@@ -34,9 +34,39 @@ if($db->connect_errno > 0){
   if(isset($_GET["query"])){
     $query = $_GET["query"];
     $rs = $db -> query($query);
+
+  $fieldinfo = mysqli_fetch_fields($rs);
+  $field_num = mysqli_num_fields($rs);
+  echo "<tr align=center>";
+  foreach ($fieldinfo as $val){
+    echo '<td><b>'.$val->name.'</b></td>';
+  }
   
-  while($row = $rs->fetch_assoc())
-    echo htmlentities($row['_message']);
+  echo "</tr>"; 
+  while($row = mysqli_fetch_row($rs)){
+    
+    echo "<tr>"; 
+
+   
+    $count = 0;
+    while($count < $field_num){
+      if($row[$count])
+        echo  "<td> $row[$count]</td>";
+      else
+        echo "<td>N/A </td>";
+      
+      $count++;
+    }
+    echo "</tr>"; 
+  }
+   echo "<tr>"; 
+
+  
+  
+  
+
+ 
+  
   
   $rs->free();
 
@@ -46,6 +76,7 @@ $db->close();
 
 
 ?>
+</table>
 
 
 
