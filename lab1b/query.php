@@ -77,7 +77,8 @@ $db->close();
 
 ?>
 </table>
-
+</body>
+</html>
 
 
 
