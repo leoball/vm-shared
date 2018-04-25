@@ -27,10 +27,10 @@
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <p>&nbsp;&nbsp;Add new content</p>
-            <li><a href="homepage.php">Add Actor/Director</a></li>
-            <li><a href="Add_movie.php">Add Movie Information</a></li>
-            <li><a href="Add_M_A_R.php">Add Movie/Actor Relation</a></li>
-            <li><a href="Add_M_D_R.php">Add Movie/Director Relation</a></li>
+            <li><a href="Add_AD.php">Add Actor/Director</a></li>
+            <li><a href="Add_M.php">Add Movie Information</a></li>
+            <li><a href="Add_MAR.php">Add Movie/Actor Relation</a></li>
+            <li><a href="Add_MDR.php">Add Movie/Director Relation</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <p>&nbsp;&nbsp;Browsering Content :</p>
