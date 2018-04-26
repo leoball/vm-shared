@@ -136,6 +136,7 @@
           echo("There has being a problem adding the genre $genre[$i]!<br>");
       }
 
+      $db->close();
     }
 
   }
