@@ -123,12 +123,12 @@
 
                 echo "<br>";
                 if($first_name == ""){
-                  echo "Please enter a valid movie title!<br>";
+                  echo "Please enter a valid first name!<br>";
                 }
                 else if($last_name == ""){
-                  echo "Please enter a valid movie production year!<br>";
+                  echo "Please enter a valid last name!<br>";
                 }
-                else if(checkdate(birth_month, birth_day, birth_year)){
+                else if(!checkdate($birth_month, $birth_day, $birth_year)){
                   echo "Invalid Date for birthday!<br>";
                 }
                 else{
@@ -140,7 +140,7 @@
                   $birthday = convertdate($birth_year,$birth_month,$birth_day);
                   $deathday = "NULL";
                   if($death_year!=""||$death_month!=""||$death_day!=""){
-                      if(checkdate(death_month, death_day, deatn_year))
+                      if(!checkdate($death_month, $death_day, $death_year))
                         die("invalid death date");
                       $deathday = convertdate($death_year,$death_month,$death_day);
                       if($deathday <= $birthday)
@@ -152,7 +152,7 @@
                   else
                     $insert_query = "INSERT INTO Actor VALUES($new_id,\"$last_name\",\"$first_name\",\"$sex\",$birthday,$deathday);";
                   if ($db->query($insert_query)){
-                    echo("You've successfully added the actor/director '$last_name' '$first_name'!<br>");
+                    echo("You've successfully added the actor/director $last_name $first_name !<br>");
                     $db->query("UPDATE MaxPersonID SET id=$new_id");
                   }
                   else
