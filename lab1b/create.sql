@@ -7,7 +7,7 @@ CREATE TABLE Movie (
 	year INT NOT NULL,
 		-- Every movie must have a production year.
 	rating VARCHAR(10),
-	company VARCHAR(50),
+	company VARCHAR(50) NOT NULL,
 	CHECK (year > 1800 AND year < 3000)
 		-- Every movie should be produced after film technology invented
 ) ENGINE = INNODB;
