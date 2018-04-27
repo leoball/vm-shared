@@ -1,5 +1,5 @@
 
-< ?php
+<?php
  
 	$db = mysqli_connect('localhost', 'cs143', '', 'CS143');
  
