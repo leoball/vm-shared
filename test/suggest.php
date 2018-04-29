@@ -1,11 +1,14 @@
 
 <?php
+<<<<<<< Updated upstream
  
+=======
+>>>>>>> Stashed changes
 	$db = mysqli_connect('localhost', 'cs143', '', 'CS143');
  
-	$company    = $_GET['company'];
+	$company = $_GET["company"];
  
-	$sql        = "SELECT title FROM Movie WHERE title LIKE '$company%'";
+	$sql	= "SELECT title FROM Movie WHERE title LIKE '$company%'";
 
 	$res        = $db->query($sql);
  	print_r($res);
