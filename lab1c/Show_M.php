@@ -16,7 +16,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header navbar-defalt">
-          <a class="navbar-brand" href="index.php">CS143 DataBase Query System (Demo)</a>
+          <a class="navbar-brand" href="index.php" style="color: black">Movie Actor Query System</a>
         </div>
       </div>
     </nav>
@@ -29,11 +29,7 @@
             <li><a href="Add_M.php">Add Movie Information</a></li>
             <li><a href="Add_MAR.php">Add Movie/Actor Relation</a></li>
             <li><a href="Add_MDR.php">Add Movie/Director Relation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <p>&nbsp;&nbsp;Browsering Content :</p>
-            <li><a href="Show_A.php">Show Actor Information</a></li>
-            <li><a href="Show_M.php">Show Movie Information</a></li>
+            <li><a href="Add_review.php">Add Movie review</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <p>&nbsp;&nbsp;Search Interface:</p>
@@ -47,7 +43,7 @@
                 $mid = $_GET["mid"];
                 $db = new mysqli('localhost', 'cs143', '', 'CS143');
                 $res = $db->query("SELECT title,year,rating,company FROM Movie WHERE id = $mid;");
-              echo "<h4 style=\"margin-top:5%\"><b>Movie's info:</b></h4> <div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>title</td><td>director</td><td>year</td><td>rating</td><td>company</td></thead></tr><tbody>";
+              echo "<h4 style=\"margin-top:5%\"><b>Movie's info:</b></h4> <div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>title</td><td>director</td><td>year</td><td>MPRR rating</td><td>producer</td><td>genre</td></thead></tr><tbody>";
               $row = mysqli_fetch_row($res);
 
               $res1 = $db->query("SELECT did FROM MovieDirector WHERE mid = $mid;");
@@ -56,11 +52,30 @@
               
               $res1 = $db->query("SELECT first, last FROM Director WHERE id = $row1[0];");
               $row1 = mysqli_fetch_row($res1);
+              $res1 = $db->query("SELECT genre FROM MovieGenre WHERE mid = $mid;");
+              while($row2 = mysqli_fetch_row($res1))
+                $genre .=" $row2[0]";
+              echo "<tr><td>$row[0]</td><td>$row1[0] $row1[1]</td><td>$row[1]</td><td>$row[2]</td><td>$row[3]</td><td>$genre</td></tr>";
+              echo "</table></div>";
 
-              echo "<tr><td>$row[0]</td><td>$row1[0] $row1[1]</td><td>$row[1]</td><td>$row[2]</td><td>$row[3]</td></tr>";
+              echo "<h4 style=\"margin-top:2%\"><b>Actors in this Movie:</b></h4> <div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>Name</td><td>Role</td></thead></tr><tbody>";
+              $res = $db->query("SELECT aid, role FROM MovieActor WHERE mid = $mid;");
+              while($row = mysqli_fetch_row($res)){
+                $res1 = $db->query("SELECT first,last FROM Actor WHERE id = $row[0];");
+                $row1 = mysqli_fetch_row($res1);
+                echo "<tr><td><a href =\"Show_A.php?aid=$row[0]\">$row1[0] $row1[1]</a></td><td>$row[1]</td></tr>";
+              }
+              echo "</table></div>";
 
-               echo "</table></div>";
-               $db->close();
+              echo "<h4 style=\"margin-top:2%\"><b>User review for the Movie:</b></h4>";
+              $res = $db->query("SELECT AVG(rating), COUNT(*) FROM Review WHERE mid = $mid;");
+              $row = mysqli_fetch_row($res);
+              echo "<p>$row[1] user left their comments the average rating is $row[0]</p>";
+
+
+
+
+              $db->close();
 
               }
              

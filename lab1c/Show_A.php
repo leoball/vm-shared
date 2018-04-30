@@ -16,7 +16,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header navbar-defalt">
-          <a class="navbar-brand" href="index.php">CS143 DataBase Query System (Demo)</a>
+          <a class="navbar-brand" href="index.php" style="color: black">Movie Actor Query System</a>
         </div>
       </div>
     </nav>
@@ -29,12 +29,9 @@
             <li><a href="Add_M.php">Add Movie Information</a></li>
             <li><a href="Add_MAR.php">Add Movie/Actor Relation</a></li>
             <li><a href="Add_MDR.php">Add Movie/Director Relation</a></li>
+            <li><a href="Add_review.php">Add Movie review</a></li>
           </ul>
-          <ul class="nav nav-sidebar">
-            <p>&nbsp;&nbsp;Browsering Content :</p>
-            <li><a href="Show_A.php">Show Actor Information</a></li>
-            <li><a href="Show_M.php">Show Movie Information</a></li>
-          </ul>
+          
           <ul class="nav nav-sidebar">
             <p>&nbsp;&nbsp;Search Interface:</p>
             <li><a href="search.php">Search/Actor Movie</a></li>

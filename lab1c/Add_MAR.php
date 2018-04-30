@@ -8,17 +8,7 @@
   <link href="bootstrap.min.css" rel="stylesheet">
   <link href="lab1c.css" rel="stylesheet">
   <style>
-.inputstl { 
-    padding: 6px; 
-    border: solid 1px #0077B0; 
-    outline: 0; 
-    background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #C6ECFF), to(#FFFFFF)); 
-    background: -moz-linear-gradient(top, #FFFFFF, #C6ECFF 1px, #FFFFFF 25px); 
-    box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
-    -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
-    -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px; 
 
-    } 
    
 </style>
 </head>
@@ -26,7 +16,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header navbar-defalt">
-          <a class="navbar-brand" href="index.php">CS143 DataBase Query System (Demo)</a>
+          <a class="navbar-brand" href="index.php" style="color: black">Movie Actor Query System</a>
         </div>
       </div>
     </nav>
@@ -42,11 +32,7 @@
             <li><a href="Add_MDR.php">Add Movie/Director Relation</a></li>
             <li><a href="Add_review.php">Add Movie review</a></li>
           </ul>
-          <ul class="nav nav-sidebar">
-            <p>&nbsp;&nbsp;Browsering Content :</p>
-            <li><a href="Show_A.php">Show Actor Information</a></li>
-            <li><a href="Show_M.php">Show Movie Information</a></li>
-          </ul>
+          
           <ul class="nav nav-sidebar">
             <p>&nbsp;&nbsp;Search Interface:</p>
             <li><a href="search.php">Search/Actor Movie</a></li>
@@ -57,7 +43,7 @@
             <form method="GET" action="Add_MAR.php" autocomplete="on">
                 <div class="form-group">
                   <label for="movie">Movie Title</label><br>
-                  <select class="form-control form-control-lg inputstl" name="m_id">
+                  <select class="form-control form-control-lg" name="m_id">
                   <?php
                   $db = new mysqli('localhost', 'cs143', '', 'CS143');
                   if($db->connect_errno)
@@ -78,7 +64,7 @@
                 
                 <div class="form-group">
                   <label for="actor">Actor Name(First Last)</label><br>
-                  <select class="form-control form-control-lg inputstl" name="a_id">
+                  <select class="form-control form-control-lg" name="a_id">
                   <?php
                   $db = new mysqli('localhost', 'cs143', '', 'CS143');
                   if($db->connect_errno)
