@@ -13,7 +13,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header navbar-defalt">
-          <a class="navbar-brand" href="index.php" style="color: black">Movie Actor Query System</a>
+          <a class="navbar-brand" href="index.php" style="color: white">Movie Actor Query System</a>
         </div>
       </div>
     </nav>
