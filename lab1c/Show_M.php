@@ -42,58 +42,47 @@
         </div>
          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h3><b> Movie Information Page :</b></h3>
-         <hr>
-            <hr>
-           <label for="search_input">Search:</label>
+          <?php
+              if($_GET){
+                $mid = $_GET["mid"];
+                $db = new mysqli('localhost', 'cs143', '', 'CS143');
+                $res = $db->query("SELECT title,year,rating,company FROM Movie WHERE id = $mid;");
+              echo "<h4 style=\"margin-top:5%\"><b>Movie's info:</b></h4> <div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>title</td><td>director</td><td>year</td><td>rating</td><td>company</td></thead></tr><tbody>";
+              $row = mysqli_fetch_row($res);
+
+              $res1 = $db->query("SELECT did FROM MovieDirector WHERE mid = $mid;");
+
+              $row1 = mysqli_fetch_row($res1);
+              
+              $res1 = $db->query("SELECT first, last FROM Director WHERE id = $row1[0];");
+              $row1 = mysqli_fetch_row($res1);
+
+              echo "<tr><td>$row[0]</td><td>$row1[0] $row1[1]</td><td>$row[1]</td><td>$row[2]</td><td>$row[3]</td></tr>";
+
+               echo "</table></div>";
+               $db->close();
+
+              }
+             
+
+              
+              
+
+              
+            
+            
+          ?>
+          <label for="search_input">Search:</label>
           <form class="form-group" action="search.php" method ="GET" id="usrform">
-              <input type="text" id="search_input" class="form-control" placeholder="Search..." name="result"><br>
+              <input type="text" id="search_input" class="form-control" placeholder="Search..." name="search"><br>
               <input type="submit" value="GO" class="btn btn-default" style="margin-bottom:10px">
           </form>
-          <?php
-          function search_actor($keyword, $db){
-            $query = "SELECT id,last,first,dob FROM Actor WHERE";
-            foreach ($keyword as $key) {
-              #$key = strtoupper($key);
-            $query .= " (last LIKE '%$key%' OR first LIKE '%$key%') AND";
-            }
-          if (substr($query, -3) == 'AND')
-          $query = substr($query, 0, -3);
-
-          $query .= "ORDER BY last, first";
-          $rs = $db->query($query);
-    
-
-          while($row = mysqli_fetch_row($rs)) {
-          echo "<tr><td><a>$row[2] $row[1]</a></td><td><a>$row[3]</a></td></tr>";
-      
-          }
-      }
-
-  
-
-  if (isset($_GET["search"]))
-  {
-    $db = new mysqli('localhost', 'cs143', '', 'CS143');
-    
-    $search = $_GET["search"];
-
-    $keyword = explode(' ', $search);
-
-    echo "<h4><b>matching Actors are:</b></h4><div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>Name</td><td>Date of Birth</td></thead></tr><tbody>";
-
-    search_actor($keyword, $db);
-
-    echo "<h4><b>matching Movie are:</b></h4><div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>title</td><td>year</td></thead></tr><tbody>";
-
-    search_movie($keyword, $db);
-
-
-    $db->close();
-  }
-?>
+          </div>
+          
          </div>
       </div>
-    </div>
+      </div>
+    
   
 
 </body>

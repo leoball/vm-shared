@@ -58,25 +58,17 @@
   function search_actor($keyword, $db){
     $query = "SELECT id,last,first,dob FROM Actor WHERE";
     foreach ($keyword as $key) {
-      #$key = strtoupper($key);
       $query .= " (last LIKE '%$key%' OR first LIKE '%$key%') AND";
     }
     if (substr($query, -3) == 'AND')
       $query = substr($query, 0, -3);
 
     $query .= "ORDER BY last, first";
-
-    #print_r($query);
-    #echo "<br>";
-
-    #print_r($db->query($query));
     $rs = $db->query($query);
-    #print_r($rs);
-
     while($row = mysqli_fetch_row($rs)) {
       # print("<td>"."<a href=\"BrowseActor.php?actor_id=".$row[0]."\">".$row[1].",".$row[2]."</a>"."</td>");
       # <a href=" Show_A.php?identifier=12514 ">
-      echo "<tr><td><a>$row[2] $row[1]</a></td><td><a>$row[3]</a></td></tr>";
+      echo "<tr><td><a href =\"Show_A.php?aid=$row[0]\"> $row[2] $row[1]</a></td><td><a>$row[3]</a></td></tr>";
       #print_r($row);
       #echo "<br>";
     }
@@ -92,38 +84,28 @@
       $query = substr($query, 0, -3);
 
     $query .= "ORDER BY title";
-
-    #print_r($query);
-    #echo "<br>";
-
-    #print_r($db->query($query));
     $rs = $db->query($query);
     #print_r($rs);
 
     while($row = mysqli_fetch_row($rs)) {
-      # print("<td>"."<a href=\"BrowseActor.php?actor_id=".$row[0]."\">".$row[1].",".$row[2]."</a>"."</td>");
-      # <a href=" Show_A.php?identifier=12514 ">
-      echo "<tr><td><a>$row[1]</a></td><td><a>$row[2]</a></td></tr>";
-      #print_r($row);
-      #echo "<br>";
-    }
+      echo "<tr><td><a href =\"Show_M.php?mid=$row[0]\">$row[1]</a></td><td><a>$row[2]</a></td></tr>";
+     }
   }
 
-  if (isset($_GET["search"]))
-  {
+  if (isset($_GET["search"])){
     $db = new mysqli('localhost', 'cs143', '', 'CS143');
-    
     $search = $_GET["search"];
-
     $keyword = explode(' ', $search);
 
     echo "<h4><b>matching Actors are:</b></h4><div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>Name</td><td>Date of Birth</td></thead></tr><tbody>";
 
     search_actor($keyword, $db);
+    echo "</table></div>";
 
     echo "<h4><b>matching Movie are:</b></h4><div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>title</td><td>year</td></thead></tr><tbody>";
 
     search_movie($keyword, $db);
+    echo "</table></div>";
 
 
     $db->close();

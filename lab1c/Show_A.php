@@ -42,13 +42,49 @@
         </div>
          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h3><b> Actor Information Page :</b></h3>
-         <hr>
-            <hr>
-           <label for="search_input">Search:</label>
+          <?php
+              if($_GET){
+                $aid =$_GET["aid"];
+              
+              $db = new mysqli('localhost', 'cs143', '', 'CS143');
+              $res = $db->query("SELECT id,sex,last,first,dob,dod FROM Actor WHERE id = $aid;");
+              echo "<h4 style=\"margin-top:5%\"><b>Actor's info:</b></h4> <div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>Name</td><td>Sex</td><td>Date of Birth</td><td>Date of Death</td></thead></tr><tbody>";
+              $row = mysqli_fetch_row($res);
+
+              if($row){
+                $dod = $row[5];
+                if($row[5] == NULL)
+                  $dod ="Still Alive";
+
+                echo "<tr><td> $row[3] $row[2]</td><td>$row[1]</td><td>$row[4]</td><td>$dod</td></tr>";
+
+              }
+              echo "</table></div>";
+
+              echo "<h4><b>Actor's Movie:</b></h4> <div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>Movie Name</td><td>Role</td></thead></tr><tbody>";
+
+              $res = $db->query("SELECT mid, role FROM MovieActor WHERE aid = $aid;");
+              while($row = mysqli_fetch_row($res)){
+                $res1 = $db->query("SELECT title FROM Movie WHERE id = $row[0];");
+                $row1 = mysqli_fetch_row($res1);
+                echo "<tr><td><a href =\"Show_M.php?mid=$row[0]\">$row1[0]</a></td><td>$row[1]</td></tr>";
+              }
+              echo "</table></div>";
+              
+
+              $db->close();
+            
+            }
+          ?>
+
+        
+        <label for="search_input">Search:</label>
           <form class="form-group" action="search.php" method ="GET" id="usrform">
-              <input type="text" id="search_input" class="form-control" placeholder="Search..." name="result"><br>
+              <input type="text" id="search_input" class="form-control" placeholder="Search..." name="search"><br>
               <input type="submit" value="GO" class="btn btn-default" style="margin-bottom:10px">
           </form>
+          </div>
+          
          </div>
       </div>
     </div>
