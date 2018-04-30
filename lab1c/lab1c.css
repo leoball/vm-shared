@@ -19,8 +19,8 @@ body {
 }
 
 .navbar-fixed-top {
-  background-image: url('image.jpg');
-  background-color: white;
+  
+  background-color: #FF0000;
   border: 0;
   min-height: 50px;
   font-style: italic;
