@@ -31,6 +31,7 @@
             <li><a href="Add_M.php">Add Movie Information</a></li>
             <li><a href="Add_MAR.php">Add Movie/Actor Relation</a></li>
             <li><a href="Add_MDR.php">Add Movie/Director Relation</a></li>
+            <li><a href="Add_review.php">Add Movie review</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <p>&nbsp;&nbsp;Browsering Content :</p>
