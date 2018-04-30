@@ -70,7 +70,23 @@
               echo "<h4 style=\"margin-top:2%\"><b>User review for the Movie:</b></h4>";
               $res = $db->query("SELECT AVG(rating), COUNT(*) FROM Review WHERE mid = $mid;");
               $row = mysqli_fetch_row($res);
-              echo "<p>$row[1] user left their comments the average rating is $row[0]</p>";
+              if($row[1] == 0)
+                echo "<p>No one has left an review, you can add review below:</p>";
+              else
+                echo "<p>$row[1] user left their comments the average rating is $row[0]</p>";
+
+                echo "<p><a href=\"Add_review.php\">Add Movie review by clicking this link</a></p>";
+
+              if($row[1] != 0){
+                echo "<h4 style=\"margin-top:2%\"><b>Details of User review:</b></h4>";
+                $res = $db->query("SELECT * FROM Review WHERE mid = $mid;");
+                while($row = mysqli_fetch_row($res)){
+                  echo "<p>$row[0] at $row[1] gives the rating: $row[3],comments: $row[4]</p> ";
+
+                }
+              
+              }
+
 
 
 

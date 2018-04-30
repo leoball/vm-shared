@@ -94,6 +94,9 @@
     $mid = $_GET["m_id"];
     $a_id = $_GET["a_id"];
     $role = $_GET["role"];
+    if(strlen($role) == 0)
+      die('Error: Actors should have a role.');
+
     $db = new mysqli('localhost', 'cs143', '', 'CS143');
     if($db->connect_errno)
       die('Error connecting to the database');
