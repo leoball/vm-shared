@@ -52,42 +52,38 @@
 
             
 <?php
-  function search_actor($keyword, $db){
-    $query = "SELECT id,last,first,dob FROM Actor WHERE";
+  function search($keyword, $db, $type){
+    if ($type == 'actor')
+      $query = "SELECT id,last,first,dob FROM Actor WHERE";
+    else if ($type == 'movie')
+      $query = "SELECT id,title,year FROM Movie WHERE";
+
     foreach ($keyword as $key) {
-      $query .= " (last LIKE '%$key%' OR first LIKE '%$key%') AND";
+      if ($type == 'actor')
+        $query .= " (last LIKE '%$key%' OR first LIKE '%$key%') AND";
+      else if ($type == 'movie')
+        $query .= " title LIKE '%$key%' AND";
     }
     if (substr($query, -3) == 'AND')
       $query = substr($query, 0, -3);
 
-    $query .= "ORDER BY last, first";
+    if ($type == 'actor')
+      $query .= "ORDER BY last, first";
+    else if ($type == 'movie')
+      $query .= "ORDER BY title";
     $rs = $db->query($query);
     while($row = mysqli_fetch_row($rs)) {
       # print("<td>"."<a href=\"BrowseActor.php?actor_id=".$row[0]."\">".$row[1].",".$row[2]."</a>"."</td>");
       # <a href=" Show_A.php?identifier=12514 ">
-      echo "<tr><td><a href =\"Show_A.php?aid=$row[0]\"> $row[2] $row[1]</a></td><td><a>$row[3]</a></td></tr>";
+      if ($type == 'actor')
+        echo "<tr><td><a href =\"Show_A.php?aid=$row[0]\"> $row[2] $row[1]</a></td><td><a>$row[3]</a></td></tr>";
+      else if ($type == 'movie')
+        echo "<tr><td><a href =\"Show_M.php?mid=$row[0]\">$row[1]</a></td><td><a>$row[2]</a></td></tr>";
       #print_r($row);
       #echo "<br>";
     }
   }
 
-  function search_movie($keyword, $db){
-    $query = "SELECT id,title,year FROM Movie WHERE";
-    foreach ($keyword as $key) {
-      #$key = strtoupper($key);
-      $query .= " title LIKE '%$key%' AND";
-    }
-    if (substr($query, -3) == 'AND')
-      $query = substr($query, 0, -3);
-
-    $query .= "ORDER BY title";
-    $rs = $db->query($query);
-    #print_r($rs);
-
-    while($row = mysqli_fetch_row($rs)) {
-      echo "<tr><td><a href =\"Show_M.php?mid=$row[0]\">$row[1]</a></td><td><a>$row[2]</a></td></tr>";
-     }
-  }
 
   if (isset($_GET["search"])){
     $db = new mysqli('localhost', 'cs143', '', 'CS143');
@@ -96,12 +92,12 @@
 
     echo "<h4><b>matching Actors are:</b></h4><div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>Name</td><td>Date of Birth</td></thead></tr><tbody>";
 
-    search_actor($keyword, $db);
+    search($keyword, $db, 'actor');
     echo "</table></div>";
 
     echo "<h4><b>matching Movie are:</b></h4><div class='table-responsive'> <table class='table table-bordered table-condensed table-hover'><thead> <tr><td>title</td><td>year</td></thead></tr><tbody>";
 
-    search_movie($keyword, $db);
+    search($keyword, $db, 'movie');
     echo "</table></div>";
 
 
