@@ -99,7 +99,7 @@
                       <input type="text" class="form-control" maxlength="2" size="2" placeholder="DD" name="dodd">
                   </div>
                 </div>
-                <button type="submit" class="btn btn-default">Submit!</button>
+                <button type="submit" class="btn btn-default">ADD</button>
             </form>
             <?php
               function convertdate($year,$month,$day){
@@ -148,7 +148,7 @@
                   else
                     $insert_query = "INSERT INTO Actor VALUES($new_id,\"$last_name\",\"$first_name\",\"$sex\",$birthday,$deathday);";
                   if ($db->query($insert_query)){
-                    echo("You've successfully added the actor/director $last_name $first_name !<br>");
+                    echo("You've successfully added the actor/director $first_name $last_name!<br>");
                     $db->query("UPDATE MaxPersonID SET id=$new_id");
                   }
                   else

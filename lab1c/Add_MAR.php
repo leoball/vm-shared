@@ -69,11 +69,11 @@
                   $db = new mysqli('localhost', 'cs143', '', 'CS143');
                   if($db->connect_errno)
                     die('Error connecting to the database');
-                  $sql = "SELECT id, last, first, dob FROM Actor ORDER BY last";
+                  $sql = "SELECT id, last, first, dob FROM Actor ORDER BY first,last";
                   $result = $db->query($sql);
                   if($result){
                   while($row = $result->fetch_object())
-                    echo "<option value='$row->id'> $row->first $row->last ($row->dob)</option>";
+                    echo "<option value='$row->id'>$row->first $row->last ($row->dob)</option>";
                   }
                   else
                   echo mysqli_error($db); 

@@ -38,8 +38,8 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h3>Add Actors for Movie</h3>
-            <form method="GET" action="Add_MAR.php" autocomplete="on">
+            <h3>Add Director for Movie</h3>
+            <form method="GET" action="Add_MDR.php" autocomplete="on">
                 <div class="form-group">
                   <label for="movie">Movie Title</label><br>
                   <select class="form-control form-control-lg" name="m_id">
@@ -68,7 +68,7 @@
                   $db = new mysqli('localhost', 'cs143', '', 'CS143');
                   if($db->connect_errno)
                     die('Error connecting to the database');
-                  $sql = "SELECT id, last, first, dob FROM Director ORDER BY last";
+                  $sql = "SELECT id, last, first, dob FROM Director ORDER BY first,last;";
                   $result = $db->query($sql);
                   if($result){
                   while($row = $result->fetch_object())
@@ -85,7 +85,7 @@
 <?php
   if(isset($_GET["m_id"],$_GET["d_id"])){
     $mid = $_GET["m_id"];
-    $a_id = $_GET["d_id"];
+    $d_id = $_GET["d_id"];
     $db = new mysqli('localhost', 'cs143', '', 'CS143');
     if($db->connect_errno)
       die('Error connecting to the database');

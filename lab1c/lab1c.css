@@ -4,7 +4,7 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 a:hover { 
-    background-color: yellow;
+    background-color: #ffe6f2;
 }
 body {
   padding-top: 30px;
@@ -20,11 +20,12 @@ body {
 
 .navbar-fixed-top {
   
-  background-color: #FF0000;
+  background-color: #660044;
   border: 0;
   min-height: 60px;
-  font-style: italic;
-  padding-left: 500px;
+  font-style: bolder;
+  padding-left: 450px;
+  padding-top: 5px;
 
 
 
@@ -44,7 +45,7 @@ body {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; 
-    background-color: #dddddd;
+    background-color: #ffe6f2;
     
   }
 }
@@ -68,6 +69,7 @@ body {
   font-style: bolder;
   padding-top: 5px;
   font-size: 15px;
+  color: #660044;
 }
 
 .nav-sidebar >li > a:hover{
@@ -89,6 +91,7 @@ body {
 
   }
 }
+
 .main .page-header {
   margin-top: 0;
 }
